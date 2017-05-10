@@ -12,5 +12,12 @@ public class Main {
         PC thePC = new PC(theCase, monitor, motherboard);
 
         thePC.powerUp();
+
+        Bed myBed = new Bed("queen", "blue", 2 );
+        Bathroom myBathroom = new Bathroom(true, 200, 2);
+        Window myWindow = new Window(4, "traditional", true );
+
+        Bedroom masterBedroom = new Bedroom(myBed, myBathroom, myWindow);
+        masterBedroom.turnSinkOn();
     }
 }
