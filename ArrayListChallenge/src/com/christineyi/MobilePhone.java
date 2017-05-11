@@ -37,13 +37,22 @@ public class MobilePhone {
             return false;
         }
         //if contact exists, set contact with (Index, Contact)
-        myContacts.set(foundPosition, newContact);
+        this.myContacts.set(foundPosition, newContact);
         System.out.println(oldContact.getName() + " was replaced with " + newContact.getName());
         return true;
     }
 
-    //remove contact
-
+            //remove contact
+    public boolean removeContact(Contact contact){
+        int positionNumber = findContact(contact);
+        if(positionNumber >= 0){
+            System.out.println(contact.getName() + " was deleted.");
+            this.myContacts.remove(positionNumber);
+            return true;
+        }
+        System.out.println(contact.getName() + " was not found. Cannot delete.");
+        return false;
+    }
 
     //query contact.. find index of contact
     //by Contact object
@@ -61,5 +70,30 @@ public class MobilePhone {
             }
         }
         return -1;
+    }
+
+    //return contact name
+    public String queryContact(Contact contact){
+        if(findContact(contact) >= 0){
+            return contact.getName();
+        }
+        return null;
+    }
+
+    //return contact object
+    public Contact queryContact(String name){
+        int position = findContact(name);
+        if (position >= 0){
+            return this.myContacts.get(position);
+        }
+        return null;
+    }
+
+
+    public void printContacts(){
+        for (int i = 0; i < this.myContacts.size(); i++){
+            System.out.println((i + 1) + ". " + this.myContacts.get(i).getName() + " -> " +
+            this.myContacts.get(i).getPhoneNumber());
+        }
     }
 }
