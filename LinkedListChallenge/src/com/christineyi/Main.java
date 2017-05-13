@@ -1,9 +1,6 @@
 package com.christineyi;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -30,6 +27,8 @@ public class Main {
         Playlist playlist1 = new Playlist("Morning Jamz");
         playlist1.addSongToPlaylist("No One Else", library);
         playlist1.addSongToPlaylist("Say It Ain't So", library);
+        playlist1.addSongToPlaylist("Why Bother?", library);
+        playlist1.addSongToPlaylist("No Other One", library);
 
 
         control(playlist1.getPlaylistSongs());
@@ -93,7 +92,15 @@ public class Main {
                 case "remove song":
                     listIterator.remove();
                     System.out.println("Removing song.");
+                    //make sure there's a next available song
+                    if(listIterator.hasNext()){
+                        System.out.println("Now playing: " + listIterator.next().getTitle());
+                    } else if(listIterator.hasPrevious()) {
+                        System.out.println("Now playing: " + listIterator.previous().getTitle());
+                    }
                     break;
+                case "tracklist":
+                    printPlaylist(playlist);
                 case "menu":
                     //Print menu options
                     printMenu();
@@ -102,13 +109,27 @@ public class Main {
         }
     }
 
+    //print menu options
     private static void printMenu(){
         System.out.println("Playlist options: Press ");
         System.out.println("\tquit - quit the application");
         System.out.println("\tnext - play next song");
         System.out.println("\tprevious - play previous song");
         System.out.println("\tremove song - delete song from playlist");
+        System.out.println("\ttracklist - show all songs on playlist");
         System.out.println("\tmenu - view menu options");
+    }
+
+    //print out playlist tracklist
+    private static void printPlaylist(LinkedList<Song> playlist){
+        Iterator<Song> iterator = playlist.iterator();
+        int songNumber = 1;
+        System.out.println("=====================");
+        while(iterator.hasNext()){
+            System.out.println(songNumber + ". " + iterator.next().getTitle());
+            songNumber += 1;
+        }
+        System.out.println("=====================");
     }
 
 }

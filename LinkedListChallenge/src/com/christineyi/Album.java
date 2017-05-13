@@ -39,15 +39,27 @@ public class Album {
     }
 
     //find Song in album by song title
+    //this method uses for each loop
     private int findSong(String songTitle){
-        for(int i = 0; i < this.songlist.size(); i++){
-            Song song = songlist.get(i);
-            if(song.getTitle().equals(songTitle)){
+        for(Song checkedSong: this.songlist){
+            if(checkedSong.getTitle().equals(songTitle)){
                 return 1;
             }
         }
         return -1;
     }
+
+
+//    //find Song in album by song title
+//    private int findSong(String songTitle){
+//        for(int i = 0; i < this.songlist.size(); i++){
+//            Song song = songlist.get(i);
+//            if(song.getTitle().equals(songTitle)){
+//                return 1;
+//            }
+//        }
+//        return -1;
+//    }
 
 
     //print the albums songs
